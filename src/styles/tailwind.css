@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+
+/* Custom Components */
+@layer components {
+  /* Header Bar */
+  .header-bar {
+    @apply bg-gray-800 p-4;
+  }
+
+  /* Sidebar/Menu */
+  .sidebar {
+    @apply w-1/4 bg-gray-700 p-4;
+  }
+  
+  .form-heading {
+    @apply text-lg font-semibold mb-2;
+  }
+
+  .input-field {
+    @apply w-full p-2 mb-4 text-black;
+  }
+
+  .submit-button {
+    @apply w-full bg-blue-500 p-2 rounded hover:bg-blue-600;
+  }
+
+  /* Weather Display Section */
+  .weather-section {
+    @apply w-3/4 p-4;
+  }
+
+  .weather-info {
+    @apply p-4 bg-gray-800 rounded;
+  }
+}
+
+@tailwind utilities;

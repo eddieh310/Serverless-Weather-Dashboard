@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link href="dist/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="header-bar">
+        <h1 class="text-2xl font-bold">Your one Stop for Serverless Weather on a Global Scale in Seconds.</h1>
+    </header>
+
+    <div class="flex">
+        <aside class="sidebar">
+            <h2 class="form-heading">Enter Location</h2>
+            <form id="locationForm">
+                <input type="text" id="locationInput" placeholder="Enter city or zip" class="input-field">
+                <button type="submit" class="submit-button">Get Weather</button>
+            </form>
+        </aside>
+
+        <main class="weather-section">
+            <h2 class="text-xl font-semibold mb-2">Weather Information</h2>
+            <div id="weatherInfo" class="weather-info">
+                <p>Enter a location to see the weather.</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
