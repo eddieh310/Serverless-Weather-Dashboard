@@ -1,5 +1,10 @@
 @tailwind base;
 @tailwind components;
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10:wght@400;700&display=swap');
+
+body {
+  font-family: 'Jersey 10', sans-serif;
+}
 
 /* Custom Components */
 @layer components {
@@ -34,5 +39,6 @@
     @apply p-4 bg-gray-800 rounded;
   }
 }
+
 
 @tailwind utilities;

@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        comic: ['"Comic Sans MS', 'Comic Sans', 'cursive']
+        'jersey10': ['Jersey 10', 'sans-serif'],
       }
     },
   },
