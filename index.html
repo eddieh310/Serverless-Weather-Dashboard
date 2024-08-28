@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jersey+10:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white font-jersey10">
+  <header class="header-bar p-4 bg-gray-800">
+    <h1 class="text-3xl">Serverless Real-Time Weather Data, built on top of AWS Cloud.</h1>
+  </header>
+
+  <div class="flex">
+    <aside class="sidebar w-1/4 p-4 bg-gray-700">
+      <h2 class="text-xl mb-4">Enter Location</h2>
+      <form id="locationForm" class="space-y-4">
+        <input type="text" id="city" name="city" placeholder="Enter city" class="w-full p-2 rounded border border-gray-600 bg-gray-800 text-white">
+        <input type="text" id="zipcode" name="zipcode" placeholder="Enter zipcode" class="w-full p-2 rounded border border-gray-600 bg-gray-800 text-white">
+        <button type="submit" class="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Get Weather</button>
+      </form>
+    </aside>
+
+    <main class="weather-section flex-1 p-4">
+      <h2 class="text-xl mb-2">Weather Information</h2>
+      <div id="weatherInfo" class="weather-info grid grid-cols-2 gap-4 bg-gray-800 p-4 rounded">
+        <p>Enter a location to see the weather.</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+// Images for weather icons (Updated path)
+    const weatherIcons = [
+      'image/sun.png',   // 0: Sun
+      'image/snow.png',  // 1: Snow
+      'image/raining.png', // 2: Rain
+      'image/partlycloudy.png', // 3: Part Cloud
+      'image/clouds.png'  // 4: Cloud
+    ];
+
+    document.getElementById('locationForm').addEventListener('submit', async function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const city = document.getElementById('city').value;
+      const zipcode = document.getElementById('zipcode').value;
+
+      const apiUrl = 'https://77xzou0gxi.execute-api.us-east-1.amazonaws.com/weatherHandler';
+
+      // Send the data to the API Gateway
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ city: city, zipcode: zipcode }),
+      });
+
+      // Handle the response
+      const data = await response.json();
+      console.log(data);  // Add this line
+      const weatherInfo = document.getElementById('weatherInfo');
+      weatherInfo.innerHTML = '';
+
+      if (data.error) {
+        weatherInfo.innerHTML = `<p>${data.error}</p>`;
+      } else {
+        data.days.forEach((day, index) => {
+          weatherInfo.innerHTML += `
+            <div class="day-info p-4 bg-gray-700 rounded text-center">
+              <h3 class="text-lg font-bold">${index === 0 ? 'Today' : `Day ${index}`}</h3>
+              <img src="${weatherIcons[day.icon]}" alt="Weather Icon" class="mx-auto my-2" style="width: 8vw; height: 8vw;">
+              <p class="text-lg">Temp: ${day.temp.toFixed(1)}°F</p>
+            </div>
+          `;
+        });
+      }
+    });
+  </script>
+</body>
+</html>
